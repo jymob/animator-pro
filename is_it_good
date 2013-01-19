@@ -1,0 +1,17 @@
+#!/bin/bash
+f1=static.cfg
+f2=runtime.cfg
+f3=prefs.cfg
+if [[ ! (-e $f1 && -e $f2 && -e $f3) ]]; then
+  echo "files missing, no, it's not good :-("
+  exit 1
+fi
+STATIC=$(grep ".*" $f1)
+RUNTIME=$(grep ".*" $f2)
+PREFS=$(grep ".*" $f3)
+if [[ ("$STATIC" == "ncores=4") && ("$RUNTIME" == "memory=1024") && ("$PREFS" == "folder=home") ]]; then
+  echo "yes, it's good :-)"
+else
+  echo "no, it's not good :-("
+  exit 2
+fi
